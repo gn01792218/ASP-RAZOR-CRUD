@@ -10,10 +10,10 @@ namespace asp_razor_crud_demo.Pages.Category;
 //有寫這個就不需要個別寫[BindProperty]
 [BindProperties]
 
-public class CreateModel : PageModel
+public class EditModel : PageModel
 {
     private readonly DataContext _db;
-    public CreateModel( DataContext db )
+    public EditModel( DataContext db )
     {
         _db = db;
     }
@@ -22,8 +22,12 @@ public class CreateModel : PageModel
     public CategoryModel Category { get; set; } //把這個屬性和ViewModel進行雙向綁定，就可以直接在各個handler中取用vieModel傳來的資料囉!
 
     //Get handler
-    public void OnGet()
+    public void OnGet(int id)
     {
+        Category = _db.Categories.Find(id);
+        //以下這些方法也可以達到同樣的效果
+        //Category = _db.Categories.SingleOrDefault(c => c.Id == Id);
+        //Category = _db.Categories.FirstOrDefault(c => c.Id == Id);
     }
 
     //Post handler
@@ -37,9 +41,10 @@ public class CreateModel : PageModel
         }
         if (ModelState.IsValid) //使用內建的ModelState會自動把表單內有綁定的屬性作驗證
         {
-            await _db.Categories.AddAsync(Category);  //因為我們有雙向綁定Category，所以可以直接取用哦!
+            Console.WriteLine(Category);
+            _db.Categories.Update(Category);  //Update方法沒有async唷~
             await _db.SaveChangesAsync();
-            TempData["success"] = "成功創建!";
+            TempData["success"] = "編輯成功!";
             return RedirectToPage("Index");  //跳回首頁
         }
         return Page(); //否則停留此頁面

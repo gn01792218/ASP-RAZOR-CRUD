@@ -8,3 +8,4 @@ public DataContext _db {get;set;}
 //要改成這樣
 private readonly DataContext _db;
 ```
+## 2.Update修改資料時，卻多出一筆資料

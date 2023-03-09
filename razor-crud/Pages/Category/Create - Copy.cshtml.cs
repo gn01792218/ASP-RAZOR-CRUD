@@ -39,7 +39,6 @@ public class CreateModel : PageModel
         {
             await _db.Categories.AddAsync(Category);  //因為我們有雙向綁定Category，所以可以直接取用哦!
             await _db.SaveChangesAsync();
-            TempData["success"] = "成功創建!";
             return RedirectToPage("Index");  //跳回首頁
         }
         return Page(); //否則停留此頁面
