@@ -1,0 +1,26 @@
+﻿@page
+@model asp_razor_crud_demo.Pages.Category.IndexModel
+@{
+}
+<a class="btn btn-primary" asp-page="Create">+ Create</a>
+<table class="table table-bordered table-striped mt-2">
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>CategoryOrder</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model.Categories)
+        {
+            <tr>
+                <td>@obj.Id</td>
+                <td>@obj.Name</td>
+                <td>@obj.DisplayOrder</td>
+                <td><a class="btn btn-primary" asp-asp-page="Edit">Edit</a></td>
+                <td><a class="btn btn-primary" asp-asp-page="Delete">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
