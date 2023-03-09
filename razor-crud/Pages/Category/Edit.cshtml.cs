@@ -41,11 +41,10 @@ public class EditModel : PageModel
         }
         if (ModelState.IsValid) //使用內建的ModelState會自動把表單內有綁定的屬性作驗證
         {
-            Console.WriteLine(Category);
-            _db.Categories.Update(Category);  //Update方法沒有async唷~
-            await _db.SaveChangesAsync();
-            TempData["success"] = "編輯成功!";
-            return RedirectToPage("Index");  //跳回首頁
+                _db.Categories.Update(Category);  //Update方法沒有async唷~
+                await _db.SaveChangesAsync();
+                TempData["success"] = "編輯成功!";
+                return RedirectToPage("Index");  //跳回首頁
         }
         return Page(); //否則停留此頁面
     }
