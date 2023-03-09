@@ -8,7 +8,7 @@ namespace asp_razor_crud_demo.Pages.Category
     public class IndexModel : PageModel
     {
         //依賴注入DB
-        public DataContext _db { get; set; }
+        private readonly DataContext _db;
         public IndexModel(DataContext db)
         {
             _db = db;
